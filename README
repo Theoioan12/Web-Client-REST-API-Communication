@@ -1,0 +1,87 @@
+Buliga Theodor Ioan
+323 CA
+
+Tema 4 - Client Web. Comunicatie cu REST API
+
+Descriere:
+Inainte de a incepe sa detaliez rezolvarea efectiva a problemelor, 
+tin sa mentionez ca am preluat scheletul de cod din cadrul laboratorului 
+9, pe care l-am modificat pe alocuri in implementarea mea. Totodata, am
+preluat si parson.c si parson.h din link-urile oferite si am 
+ales sa lucrez cu parson deoarece mi s-a parut 
+mai facil de utilizat api-ul.
+
+Voi incepe cu detalierea fisierului client.c. Creez o bucla, care 
+primeste la fiecare iteratie comanda de la stdin si se va opri cand 
+se primeste "exit" de la stdin. La fiecare iteratie, deschid o noua 
+conexiune cu serverul si fac verificarea. Apoi, urmeaza implementarea 
+fiecarei comenzi.
+
+REGISTER:
+Primesc de la stdin un nume de utilizator si o parola. Trimit cererea
+la server si verific daca s-a realizat inregistrearea cu succes. Daca 
+nu a avut succes, inseamna ca exista deja un utilizator cu acelasi 
+nume. Desi nu cerea in cerinta, in cazul in care utilizatorul este 
+deja logat, nu se mai poate face un alt register, fiindca mi 
+s-a parut mai potrivit(practic am tratat o eroare in plus).
+
+LOGIN:
+Asemanator cu register, primesc un nume de utilizator si o parola. Trimit 
+cererea la server si fac din nou verificarea. Daca autentificarea a esuat, 
+inseamna ca una dintre credidentiale este gresita, Aici, am tratat si eroarea 
+in cazul in care se afla deja logat utilizatorul. Practic, pentru 
+a putea face login este nevoie de un logout, daca este deja un utilizator 
+logat. Nu era cerut in cerinta, dar mi s-a parut mai potrivit.
+
+LOGOUT:
+Fac o cerere de tip get catre server si interpretez raspunsul. Daca 
+utilizatorul nu este logat, nu se poate face logout-ul.
+
+ENTER_LIBRARY:
+Verific daca utilizatorul e logat, fac o cerere de tip get catre server, care 
+contine cookies-urile de login. Primesc raspunsul de la server, il interpretez 
+si ofer acces la biblioteca utilizatorului.
+
+ADD_BOOK:
+In cazul in care utilizatorul este logat si se afla in biblioteca, primesc 
+de la stdin datele cartii (titlu, autor, gen, persoana care a publicat-o si 
+numarul de pagini). Trimit informatiile catre server cu o cerere de tip post. 
+Verific raspunsul primit de la server si fac afisarile.
+
+GET_BOOKS:
+Trimit o cerere de tip get, primesc raspunsul de la server si extrag 
+obiectele de tip json primite. Apoi, fac parsarea si afisez pentru 
+fiecare carte id-ul si titlul.
+
+GET_BOOK:
+Primesc id-ul cartii de la stdin. Il concatenez la url si fac 
+o cerere de tip get catre server. Daca cererea a avut succes, detaliile 
+cartii vor fi afisate, daca nu, inseamna ca nu exista o carte cu id-ul 
+respectiv.
+
+DELETE_BOOK:
+Primesc de la stdin id-ul cartii si fac o cerere de tip delete catre server. 
+Interpretez raspunsul primit de la server. Daca stergerea a esuat inseamna ca 
+nu exista o carte cu id-ul respectiv.
+
+Comentarii asupra temei:
+Cu siguranta puteam realiza o implementare mult mai buna si sigur 
+exista lucruri de imbunatatit pe alocuri. Modularizarea clar putea 
+fi mult mai buna si sunt constient ca am bucati de cod care se repeta. 
+A fost o tema interesanta si tin sa mentionez ca imi pare rau ca 
+nu am reusit sa o fac in conformitate cu checker-ul, dar am fost 
+foarte presat de timp, intrucat a fost un semestru cu foarte multe 
+teme.
+Per total a fost o tema foarte interesanta, la care pot sa zic ca am lucrat 
+cu mare placere. Chiar m-a ajutat mult sa aprofundez materia si ma simt si 
+mai pregatit pentru examen.
+
+Am adaugat si niste macro si un enum in helpers.h.
+
+Resurse / Bibliografie:
+- cursurile si laboratoarele de pcom
+- in special laboratorul 9, 
+https://gitlab.cs.pub.ro/pcom/pcom-laboratoare-public/-/tree/master/lab9
+de unde am preluat scheletul de laborator
+- parson
+https://github.com/kgabis/parson
